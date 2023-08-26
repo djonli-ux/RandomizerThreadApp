@@ -30,8 +30,8 @@
         {
             label1 = new Label();
             label2 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
+            minValue = new TextBox();
+            maxValue = new TextBox();
             generateBtn = new Button();
             showNumber = new Label();
             SuspendLayout();
@@ -54,33 +54,34 @@
             label2.TabIndex = 1;
             label2.Text = "Max:";
             // 
-            // textBox1
+            // minValue
             // 
-            textBox1.Location = new Point(75, 173);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 2;
+            minValue.Location = new Point(75, 173);
+            minValue.Name = "minValue";
+            minValue.Size = new Size(125, 27);
+            minValue.TabIndex = 2;
             // 
-            // textBox2
+            // maxValue
             // 
-            textBox2.Location = new Point(75, 232);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(125, 27);
-            textBox2.TabIndex = 3;
+            maxValue.Location = new Point(75, 232);
+            maxValue.Name = "maxValue";
+            maxValue.Size = new Size(125, 27);
+            maxValue.TabIndex = 3;
             // 
             // generateBtn
             // 
-            generateBtn.Location = new Point(413, 230);
+            generateBtn.Location = new Point(414, 230);
             generateBtn.Name = "generateBtn";
             generateBtn.Size = new Size(82, 29);
             generateBtn.TabIndex = 4;
             generateBtn.Text = "Generate";
             generateBtn.UseVisualStyleBackColor = true;
+            generateBtn.Click += generateBtn_Click;
             // 
             // showNumber
             // 
             showNumber.AutoSize = true;
-            showNumber.Location = new Point(248, 40);
+            showNumber.Location = new Point(260, 26);
             showNumber.Name = "showNumber";
             showNumber.Size = new Size(17, 20);
             showNumber.TabIndex = 5;
@@ -93,8 +94,8 @@
             ClientSize = new Size(537, 321);
             Controls.Add(showNumber);
             Controls.Add(generateBtn);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(maxValue);
+            Controls.Add(minValue);
             Controls.Add(label2);
             Controls.Add(label1);
             Name = "Form1";
@@ -107,8 +108,8 @@
 
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox minValue;
+        private TextBox maxValue;
         private Button generateBtn;
         private Label showNumber;
     }
