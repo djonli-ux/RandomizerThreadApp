@@ -19,16 +19,22 @@ namespace Randomizer_threads
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void generateBtn_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(minValue.Text, out min) && int.TryParse(maxValue.Text, out max))
-                RandomizeNumber(min, max);
-            else
-                MessageBox.Show("Invalid input for min or max value.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            int min = string.IsNullOrEmpty(minValue.Text) ? 2 : int.Parse(minValue.Text);
+            int max = string.IsNullOrEmpty(maxValue.Text) ? int.MaxValue : int.Parse(maxValue.Text);
+
+            if (min > max)
+            {
+                MessageBox.Show("Invalid range: min should be less than max", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            RandomizeNumber(min, max);
         }
     }
 }
