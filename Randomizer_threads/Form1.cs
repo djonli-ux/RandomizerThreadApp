@@ -2,17 +2,16 @@ namespace Randomizer_threads
 {
     public partial class Form1 : Form
     {
+        private bool stopGenerating = false;
         private Random rand = new Random();
-        private int min;
-        private int max;
         public Form1()
         {
             InitializeComponent();
         }
 
-        void RandomizeNumber(int min, int max) 
+        void RandomizeNumber(int min, int max)
         {
-            try 
+            try
             {
                 int result = rand.Next(min, max);
                 showNumber.Text = result.ToString();
@@ -21,6 +20,20 @@ namespace Randomizer_threads
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void GenerateRandomNumberInThread(int min, int max)
+        {
+            Thread t = new Thread(() =>
+            {
+                while (!stopGenerating) 
+                { 
+                    Thread.Sleep(500);
+                    RandomizeNumber(min, max);
+                }
+            });
+
+            t.Start();
         }
 
         private void generateBtn_Click(object sender, EventArgs e)
@@ -34,7 +47,12 @@ namespace Randomizer_threads
                 return;
             }
 
-            RandomizeNumber(min, max);
+            GenerateRandomNumberInThread(min, max);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            stopGenerating = true;
         }
     }
 }
